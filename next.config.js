@@ -6,9 +6,6 @@ const nextConfig = {
     config.externals = [...config.externals, { canvas: 'canvas' }];
     return config;
   },
-  experimental: {
-    optimizePackageImports: ['framer-motion'],
-  },
 }
 
 module.exports = nextConfig
