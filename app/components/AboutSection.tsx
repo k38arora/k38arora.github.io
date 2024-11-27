@@ -179,7 +179,7 @@ export default function AboutSection() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.7 }}
           >
-            I'm Krish Arora, a Bachelor of Mathematics student at the University of Waterloo,
+            I&apos;m Krish Arora, a Bachelor of Mathematics student at the University of Waterloo,
             combining my analytical skills with hands-on experience in data analysis,
             programming, and project management. I'm passionate about technology and finance,
             with a particular interest in stock market analysis and cryptocurrency.
