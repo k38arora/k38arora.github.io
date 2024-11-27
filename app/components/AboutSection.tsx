@@ -179,10 +179,9 @@ export default function AboutSection() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.7 }}
           >
-            I&apos;m Krish Arora, a Bachelor of Mathematics student at the University of Waterloo,
-            combining my analytical skills with hands-on experience in data analysis,
-            programming, and project management. I'm passionate about technology and finance,
-            with a particular interest in stock market analysis and cryptocurrency.
+            I&apos;m Krish Arora, a Bachelor of Mathematics student at the University of Waterloo, expecting to graduate in 2027. 
+            With a strong foundation in data analysis and strategic decision-making, I excel at identifying market trends to drive business insights. 
+            My technical expertise includes proficiency in SQL, Power BI, and advanced Excel functions, enabling efficient data management and interpretation of complex datasets.
           </motion.p>
           <motion.p 
             className="text-lg text-gray-300 mb-6" 
@@ -191,10 +190,8 @@ export default function AboutSection() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.9 }}
           >
-            I enjoy researching different companies and upcoming technologies, staying ahead
-            of trends that shape the future. My technical skills in Python, data visualization,
-            and AI applications drive my projects, including personal finance tracking and
-            interactive chatbot development.
+          Certified in Introduction to Career Skills in Data Analytics, Bloomberg Market Concepts, Webflow 101, and Data-Driven Decision Making from Google Data Analytics (all in 2024), I am committed to continuous learning and professional development. 
+          I have a keen interest in upcoming AI models and enjoy researching how they work and their potential applications.
           </motion.p>
           <motion.p 
             className="text-lg text-gray-300 mb-8" 
@@ -203,8 +200,7 @@ export default function AboutSection() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 1.1 }}
           >
-            Outside of coding, I unwind by going to the gym, exploring new books, and creating
-            content around home decor on Pinterest.
+          Outside of my academic and professional pursuits, I love reading books and staying active by going to the gym.
           </motion.p>
           <motion.a
             href="/Krish_Arora_CV.pdf"
