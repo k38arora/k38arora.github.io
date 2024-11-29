@@ -1,24 +1,23 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
+import { motion, useInView, useAnimation } from 'framer-motion'
 import { ArrowRight, Instagram, Linkedin, Github, Mail } from 'lucide-react'
 import Image from 'next/image'
 import { TypeAnimation } from 'react-type-animation'
 import Link from 'next/link'
 
-// Preload the image with proper type definition
-const preloadImage = () => {
-  const img = document.createElement('img')
-  img.src = '/images/profile-image.jpg'
-}
-
 export default function Hero() {
+  const controls = useAnimation()
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true })
   const [imageLoaded, setImageLoaded] = useState(false)
 
   useEffect(() => {
-    preloadImage()
-  }, [])
+    if (isInView) {
+      controls.start('visible')
+    }
+  }, [controls, isInView])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -43,13 +42,31 @@ export default function Hero() {
     },
   }
 
+  const imageVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        type: 'spring',
+        stiffness: 100,
+        delay: 0.5,
+      },
+    },
+  }
+
   return (
-    <section className="min-h-screen relative flex items-center">
+    <section ref={ref} className="min-h-screen relative flex items-center overflow-hidden">
       <div className="container mx-auto px-4 z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Text content - Prioritized for LCP */}
-          <div className="space-y-8">
-            <div className="space-y-4">
+          <motion.div
+            className="space-y-8"
+            initial="hidden"
+            animate={controls}
+            variants={containerVariants}
+          >
+            <motion.div className="space-y-4" variants={itemVariants}>
               <h1 
                 className="text-5xl md:text-7xl font-bold text-white"
                 style={{
@@ -73,14 +90,12 @@ export default function Hero() {
                   className="inline-block"
                 />
               </div>
-            </div>
+            </motion.div>
 
             {/* Social Links */}
             <motion.div 
               className="flex gap-3"
               variants={containerVariants}
-              initial="hidden"
-              animate="visible"
             >
               {[
                 { Icon: Instagram, href: "https://instagram.com/krish7847", label: "Instagram" },
@@ -108,8 +123,6 @@ export default function Hero() {
             <motion.div 
               className="flex flex-wrap gap-4"
               variants={containerVariants}
-              initial="hidden"
-              animate="visible"
             >
               <motion.div variants={itemVariants}>
                 <Link href="#contact">
@@ -138,8 +151,6 @@ export default function Hero() {
             <motion.div 
               className="flex gap-4"
               variants={containerVariants}
-              initial="hidden"
-              animate="visible"
             >
               {[
                 { number: "2+", label: "Years Experience" },
@@ -162,10 +173,15 @@ export default function Hero() {
                 </motion.div>
               ))}
             </motion.div>
-          </div>
+          </motion.div>
 
-          {/* Image Section - Deferred loading */}
-          <div className="hidden lg:flex justify-center items-center">
+          {/* Image Section - Optimized loading */}
+          <motion.div 
+            className="hidden lg:flex justify-center items-center"
+            initial="hidden"
+            animate={controls}
+            variants={imageVariants}
+          >
             <div className="relative w-[500px] h-[500px]">
               <div 
                 className="absolute inset-0 rounded-full overflow-hidden"
@@ -177,17 +193,30 @@ export default function Hero() {
                   alt="Krish Arora - Data Analyst & Developer"
                   width={500}
                   height={500}
-                  className="object-cover"
+                  className={`object-cover transition-opacity duration-700 ${
+                    imageLoaded ? 'opacity-100' : 'opacity-0'
+                  }`}
                   quality={75}
                   onLoadingComplete={() => setImageLoaded(true)}
-                  loading="lazy"
+                  priority
                   sizes="(max-width: 768px) 100vw, 500px"
                 />
               </div>
               
-              <div className="absolute inset-0 rounded-full border-2 border-orange-500/20" />
+              <motion.div 
+                className="absolute inset-0 rounded-full border-2 border-orange-500/20"
+                animate={{
+                  scale: [1, 1.05, 1],
+                  opacity: [0.2, 0.5, 0.2],
+                }}
+                transition={{
+                  duration: 3,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                }}
+              />
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
