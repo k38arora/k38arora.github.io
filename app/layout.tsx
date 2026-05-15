@@ -1,56 +1,36 @@
-'use client'
-
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Inter } from 'next/font/google'
-import Loading from './components/Loading'
+import localFont from 'next/font/local'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = localFont({
+  src: './fonts/GeistVF.woff',
+})
+
+export const metadata: Metadata = {
+  title: 'Krish Arora - Data Analyst & Developer',
+  description: 'Portfolio of Krish Arora, showcasing skills in data analysis and development.',
+  openGraph: {
+    title: 'Krish Arora - Data Analyst & Developer',
+    description: 'Portfolio of Krish Arora, showcasing skills in data analysis and development.',
+    type: 'website',
+  },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    setIsLoading(false)
-  }, [])
-
   return (
     <html lang="en" className="scroll-smooth">
-      <head>
-        <title>Krish Arora - Data Analyst & Developer</title>
-        <meta name="description" content="Portfolio of Krish Arora, showcasing skills in data analysis and development." />
-      </head>
       <body className={`${inter.className} bg-black text-white`}>
-        <AnimatePresence mode="wait">
-          {isLoading ? (
-            <motion.div
-              key="loader"
-              initial={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Loading />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="content"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              {children}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {children}
       </body>
     </html>
   )
 }
-
-
-

@@ -115,12 +115,12 @@ export default function Footer() {
 
         <motion.div variants={itemVariants} className="text-center space-y-4 mb-8">
           <motion.a
-            href="mailto:k38arora@uwaterloo.ca"
+            href="mailto:krish.arora161003@gmail.com"
             className="flex items-center justify-center gap-2 text-gray-400 hover:text-orange-500 transition-colors"
             whileHover={{ scale: 1.05 }}
           >
             <Mail className="w-5 h-5" />
-            <span>k38arora@uwaterloo.ca</span>
+            <span>krish.arora161003@gmail.com</span>
           </motion.a>
         </motion.div>
 

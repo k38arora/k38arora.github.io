@@ -5,7 +5,7 @@ import { motion, AnimatePresence, useInView } from 'framer-motion'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination, Navigation } from 'swiper/modules'
-import { ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { X } from 'lucide-react'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -174,10 +174,7 @@ export default function ProjectsSection() {
                   pagination={{
                     clickable: true,
                   }}
-                  navigation={{
-                    prevEl: '.swiper-button-prev',
-                    nextEl: '.swiper-button-next',
-                  }}
+                  navigation={true}
                   modules={[Autoplay, Pagination, Navigation]}
                   className="mySwiper"
                 >
@@ -194,12 +191,7 @@ export default function ProjectsSection() {
                     </SwiperSlide>
                   ))}
                 </Swiper>
-                <div className="swiper-button-prev !text-orange-500 !w-8 !h-8 !left-2">
-                  <ChevronLeft size={24} />
-                </div>
-                <div className="swiper-button-next !text-orange-500 !w-8 !h-8 !right-2">
-                  <ChevronRight size={24} />
-                </div>
+
               </div>
               <div className="p-4 sm:p-6">
                 <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2">{project.name}</h3>

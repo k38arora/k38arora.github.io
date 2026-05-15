@@ -1,23 +1,24 @@
 'use client';
 
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
 import * as THREE from 'three';
+import ErrorBoundary from './ErrorBoundary';
 
 function ParticleField() {
   const ref = useRef<THREE.Points>(null);
   const particleCount = 5000;
-  
+
   const positions = useMemo(() => {
-    const positions = new Float32Array(particleCount * 3);
+    const pos = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 10;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+      pos[i * 3] = (Math.random() - 0.5) * 10;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 10;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 10;
     }
-    return positions;
-  }, [particleCount]);
+    return pos;
+  }, []);
 
   useFrame((state) => {
     if (ref.current) {
@@ -41,10 +42,14 @@ function ParticleField() {
 
 export default function Background3D() {
   return (
-    <div className="fixed inset-0 -z-10">
-      <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
-        <ParticleField />
-      </Canvas>
-    </div>
+    <ErrorBoundary>
+      <div className="fixed inset-0 -z-10">
+        <Suspense fallback={null}>
+          <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
+            <ParticleField />
+          </Canvas>
+        </Suspense>
+      </div>
+    </ErrorBoundary>
   );
 }

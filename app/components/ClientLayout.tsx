@@ -1,28 +1,56 @@
 'use client'
 
-import dynamic from 'next/dynamic';
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import dynamic from 'next/dynamic'
+import Loading from './Loading'
+import NavBar from './NavBar'
+import Hero from './Hero'
+import ServicesSection from './ServicesSection'
+import AboutSection from './AboutSection'
+import ExperienceSection from './ExperienceSection'
+import ProjectsSection from './ProjectsSection'
+import ContactSection from './ContactSection'
+import Footer from './Footer'
 
-const Background3D = dynamic(() => import('./Background3D'), { ssr: false });
-const Navbar = dynamic(() => import('./NavBar'), { ssr: false });
-const Hero = dynamic(() => import('./Hero'), { ssr: false });
-const ServicesSection = dynamic(() => import('./ServicesSection'), { ssr: false });
-const AboutSection = dynamic(() => import('./AboutSection'), { ssr: false });
-const ExperienceSection = dynamic(() => import('./ExperienceSection'), { ssr: false });
-const ProjectsSection = dynamic(() => import('./ProjectsSection'), { ssr: false });
-const ContactSection = dynamic(() => import('./ContactSection'), { ssr: false });
-const Footer = dynamic(() => import('./Footer'), { ssr: false });
+const Background3D = dynamic(() => import('./Background3D'), { ssr: false })
+
 export default function ClientLayout() {
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    setIsLoading(false)
+  }, [])
+
   return (
-    <>
-      <Background3D />
-      <Navbar />
-      <Hero />
-      <ServicesSection />
-      <AboutSection />
-      <ExperienceSection />
-      <ProjectsSection />
-      <ContactSection />
-      <Footer />
-    </>
-  );
+    <AnimatePresence mode="wait">
+      {isLoading ? (
+        <motion.div
+          key="loader"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Loading />
+        </motion.div>
+      ) : (
+        <motion.div
+          key="content"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Background3D />
+          <NavBar />
+          <Hero />
+          <ServicesSection />
+          <AboutSection />
+          <ExperienceSection />
+          <ProjectsSection />
+          <ContactSection />
+          <Footer />
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
 }
