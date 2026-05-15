@@ -112,7 +112,7 @@ export default function ExperienceSection() {
               <motion.div
                 className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-orange-500 to-transparent"
                 initial={{ height: 0 }}
-                animate={{ height: '100%' }}
+                animate={isInView ? { height: '100%' } : { height: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
               ></motion.div>
               <motion.div

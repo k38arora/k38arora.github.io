@@ -56,7 +56,7 @@ export default function Hero() {
   }
 
   return (
-    <section ref={ref} className="min-h-screen relative flex items-center overflow-hidden">
+    <section id="home" ref={ref} className="min-h-screen relative flex items-center overflow-hidden">
       <div className="container mx-auto px-4 z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Text content - Prioritized for LCP */}
@@ -101,7 +101,7 @@ export default function Hero() {
                 { Icon: Instagram, href: "https://instagram.com/krish7847", label: "Instagram" },
                 { Icon: Linkedin, href: "https://linkedin.com/in/krish6", label: "LinkedIn" },
                 { Icon: Github, href: "https://github.com/k38arora", label: "GitHub" },
-                { Icon: Mail, href: "mailto:k38arora@uwaterloo.ca", label: "Email" }
+                { Icon: Mail, href: "mailto:krish.arora161003@gmail.com", label: "Email" }
               ].map(({ Icon, href, label }) => (
                 <motion.a
                   key={href}
@@ -197,7 +197,7 @@ export default function Hero() {
                     imageLoaded ? 'opacity-100' : 'opacity-0'
                   }`}
                   quality={75}
-                  onLoadingComplete={() => setImageLoaded(true)}
+                  onLoad={() => setImageLoaded(true)}
                   priority
                   sizes="(max-width: 768px) 100vw, 500px"
                 />

@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "next lint"
   },
   "dependencies": {
     "@react-three/drei": "^9.117.3",
     "@react-three/fiber": "^8.17.10",
-    "critters": "^0.0.23",
     "framer-motion": "^11.11.17",
     "lucide-react": "^0.460.0",
     "next": "^14.0.4",
@@ -19,7 +19,6 @@
     "react-dom": "^18.2.0",
     "react-type-animation": "^3.2.0",
     "swiper": "^11.1.15",
-    "tailwindcss-animate": "^1.0.7",
     "three": "^0.170.0",
     "three-stdlib": "^2.34.0"
   },
@@ -30,9 +29,10 @@
     "@types/three": "^0.170.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^8",
-    "eslint-config-next": "14.0.4",
+    "eslint-config-next": "^14",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.15",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "^5"
   }
 }
