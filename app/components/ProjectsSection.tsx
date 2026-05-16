@@ -36,6 +36,7 @@ const projects: Project[] = [
     description: 'An AI-powered platform that optimizes resumes for ATS compliance and automates job-specific tailoring. Reduced resume customization time by 75% using industry-aligned LaTeX templates.',
     stack: ['Python', 'OpenAI API (GPT-4-mini)', 'PyTorch', 'Streamlit'],
     tags: ['AI/ML', 'Automation', 'NLP'],
+    isPrivate: true,
     icon: BrainCircuit,
     gradient: 'from-purple-500/20 to-purple-900/5',
     iconColor: 'text-purple-400',
@@ -137,7 +138,11 @@ export default function ProjectsSection() {
 
         {/* Project cards */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-5xl mx-auto"
+          className={`grid gap-6 mx-auto ${
+            filteredProjects.length === 1
+              ? 'grid-cols-1 max-w-xl'
+              : 'grid-cols-1 sm:grid-cols-2 max-w-5xl'
+          }`}
           variants={containerVariants}
         >
           {filteredProjects.map((project) => (

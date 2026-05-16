@@ -14,6 +14,5 @@ module.exports = {
     },
     extend: {}
   },
-  safelist: ['lg:col-start-2'],
   plugins: [require("tailwindcss-animate")],
 }

@@ -25,14 +25,15 @@ const CircularProgress = React.memo(({ percentage, icon, iconText, label, inView
   const circumference = 2 * Math.PI * radius;
 
   return (
-    <motion.div 
+    <motion.div
       className="flex flex-col items-center"
       initial={{ opacity: 0, y: 20, scale: 0.8 }}
       animate={inView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 20, scale: 0.8 }}
       transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 100 }}
     >
-      <div className="relative w-28 h-28">
-        <svg className="w-full h-full -rotate-90 transform">
+      {/* Responsive circle size — viewBox ensures content always scales correctly */}
+      <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28">
+        <svg className="w-full h-full -rotate-90 transform" viewBox="0 0 112 112">
           <circle
             cx="56"
             cy="56"
@@ -56,29 +57,29 @@ const CircularProgress = React.memo(({ percentage, icon, iconText, label, inView
             strokeDasharray={circumference}
           />
         </svg>
-        <motion.div 
+        <motion.div
           className="absolute inset-0 flex items-center justify-center text-gray-300"
           initial={{ opacity: 0, rotate: -90 }}
           animate={inView ? { opacity: 1, rotate: 0 } : { opacity: 0, rotate: -90 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
           {iconText ? (
-            <span className="text-[11px] font-bold text-orange-500 text-center leading-tight">{iconText}</span>
+            <span className="text-[10px] font-bold text-orange-500 text-center leading-tight max-w-[60px] break-words">{iconText}</span>
           ) : typeof icon === 'string' ? (
-            <Image src={icon} alt={label} width={32} height={32} className="w-8 h-8" />
+            <Image src={icon} alt={label} width={32} height={32} className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
           ) : icon ? (
-            React.createElement(icon, { className: "w-8 h-8" })
+            React.createElement(icon, { className: "w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" })
           ) : null}
         </motion.div>
       </div>
-      <motion.div 
-        className="text-center mt-4"
+      <motion.div
+        className="text-center mt-2 sm:mt-4"
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.5, delay: 1 }}
       >
-        <div className="text-2xl font-bold text-orange-500">{percentage}%</div>
-        <div className="text-sm text-gray-400 mt-1">{label}</div>
+        <div className="text-lg sm:text-2xl font-bold text-orange-500">{percentage}%</div>
+        <div className="text-xs sm:text-sm text-gray-400 mt-1 text-center">{label}</div>
       </motion.div>
     </motion.div>
   );
@@ -94,12 +95,12 @@ const skills: Skill[] = [
   },
   {
     icon: "/icons/react-icon.svg",
-    label: 'React / Next.js',
+    label: 'React/Next.js',
     percentage: 85
   },
   {
     icon: "/icons/SQL-icon.svg",
-    label: 'SQL / PostgreSQL',
+    label: 'SQL/Postgres',
     percentage: 82
   },
   {
@@ -119,21 +120,10 @@ const skills: Skill[] = [
   }
 ];
 
-const sectionVariants = {
-  hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.3,
-      delayChildren: 0.2,
-    }
-  }
-};
-
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: {
       duration: 0.8,
@@ -150,40 +140,34 @@ export default function AboutSection() {
     offset: ["start end", "end start"]
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.6, 1, 0.6]);
+  // Only scale — opacity from scroll-transform conflicted with the variant fade-in
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.9]);
 
   return (
-    <motion.section 
+    <motion.section
       ref={sectionRef}
-      id="about" 
+      id="about"
       className="py-20"
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={sectionVariants}
-      style={{ opacity, scale }}
+      style={{ scale }}
     >
       <div className="container mx-auto px-4">
-        <motion.div className="max-w-4xl mx-auto text-center mb-16" variants={itemVariants}>
-          <motion.h2 
-            className="text-4xl font-bold text-white mb-6" 
-            variants={itemVariants}
+        <div className="max-w-4xl mx-auto text-center mb-16">
+          <motion.h2
+            className="text-4xl font-bold text-white mb-6"
             initial={{ opacity: 0, y: -20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             About Me
           </motion.h2>
-          <motion.div 
-            className="w-20 h-1 bg-orange-500 mx-auto mb-8" 
-            variants={itemVariants}
+          <motion.div
+            className="w-20 h-1 bg-orange-500 mx-auto mb-8"
             initial={{ width: 0 }}
             animate={isInView ? { width: 80 } : { width: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
-          ></motion.div>
+          />
           <motion.p
             className="text-lg text-gray-300 mb-6"
-            variants={itemVariants}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.7 }}
@@ -192,7 +176,6 @@ export default function AboutSection() {
           </motion.p>
           <motion.p
             className="text-lg text-gray-300 mb-6"
-            variants={itemVariants}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.9 }}
@@ -201,7 +184,6 @@ export default function AboutSection() {
           </motion.p>
           <motion.p
             className="text-lg text-gray-300 mb-8"
-            variants={itemVariants}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 1.1 }}
@@ -213,30 +195,26 @@ export default function AboutSection() {
             download="Krish_Arora_CV.pdf"
             className="inline-flex items-center px-8 py-3 bg-orange-500 text-black rounded-full hover:bg-orange-600 transition-all group"
             whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.1 }}
-            variants={itemVariants}
+            whileTap={{ scale: 0.95 }}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.8, delay: 1.3 }}
           >
             <span className="font-semibold">Download CV</span>
             <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
           </motion.a>
-        </motion.div>
+        </div>
 
-        <motion.div 
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 max-w-5xl mx-auto px-4"
-          variants={itemVariants}
+        <motion.div
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto px-2 sm:px-4"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, delay: 1.3 }}
+          transition={{ duration: 0.8, delay: 1.5 }}
         >
-          {skills.map((skill, index) => (
-            <motion.div
+          {skills.map((skill) => (
+            <div
               key={skill.label}
-              className="flex flex-col items-center bg-black/20 rounded-lg p-6"
-              variants={itemVariants}
-              custom={index}
+              className="flex flex-col items-center bg-black/20 rounded-lg p-3 sm:p-4 md:p-6"
             >
               <CircularProgress
                 percentage={skill.percentage}
@@ -245,11 +223,10 @@ export default function AboutSection() {
                 label={skill.label}
                 inView={isInView}
               />
-            </motion.div>
+            </div>
           ))}
         </motion.div>
       </div>
     </motion.section>
   );
 }
-

@@ -109,9 +109,9 @@ export default function ExperienceSection() {
           variants={itemVariants}
           className="text-center mb-12"
         >
-          <h2 className="text-5xl font-bold text-white mb-6">Experience</h2>
+          <h2 className="text-3xl sm:text-5xl font-bold text-white mb-6">Experience</h2>
           <div className="w-24 h-1 bg-orange-500 mx-auto mb-8 rounded-full"></div>
-          <p className="text-xl text-gray-300">
+          <p className="text-base sm:text-xl text-gray-300">
             Milestones in My Professional Journey
           </p>
         </motion.div>
@@ -129,26 +129,31 @@ export default function ExperienceSection() {
                 initial={{ height: 0 }}
                 animate={isInView ? { height: '100%' } : { height: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-              ></motion.div>
+              />
               <motion.div
                 whileHover={{ scale: 1.02, boxShadow: `0 8px 12px -1px ${exp.color}30, 0 4px 8px -1px ${exp.color}20` }}
-                className="ml-6 bg-white/5 backdrop-blur-sm rounded-lg p-6 shadow-lg transform transition-all duration-300"
+                className="ml-6 bg-white/5 backdrop-blur-sm rounded-lg p-6 shadow-lg"
                 style={{
                   boxShadow: `0 4px 6px -1px ${exp.color}20, 0 2px 4px -1px ${exp.color}10`
                 }}
               >
-                <div className="flex flex-wrap items-center justify-between mb-4">
-                  <h3 className="text-2xl font-semibold text-white flex items-center">
-                    <Briefcase className="w-6 h-6 mr-2 text-orange-500" />
+                {/* Title + company: stacked on mobile, row on sm+ */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-1">
+                  <h3 className="text-lg sm:text-2xl font-semibold text-white flex items-center">
+                    <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 mr-2 text-orange-500 shrink-0" />
                     {exp.title}
                   </h3>
-                  <span className="text-orange-500 font-medium">{exp.company}</span>
+                  <span className="text-orange-500 font-medium text-sm sm:text-base">{exp.company}</span>
                 </div>
-                <div className="flex items-center text-gray-400 mb-4">
-                  <MapPin className="w-4 h-4 mr-2" />
-                  <span>{exp.location}</span>
-                  <Calendar className="w-4 h-4 ml-4 mr-2" />
-                  <span>{exp.date}</span>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-gray-400 mb-4">
+                  <span className="flex items-center gap-1">
+                    <MapPin className="w-4 h-4 shrink-0" />
+                    {exp.location}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Calendar className="w-4 h-4 shrink-0" />
+                    {exp.date}
+                  </span>
                 </div>
                 <AnimatePresence>
                   {expandedIndex === index && (
@@ -199,4 +204,3 @@ export default function ExperienceSection() {
     </motion.section>
   )
 }
-

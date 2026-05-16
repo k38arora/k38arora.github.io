@@ -49,20 +49,20 @@ export default function Navbar() {
       initial="hidden"
       animate="visible"
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-black/80 backdrop-blur-sm' : 'bg-transparent'
+        isScrolled || isMobileMenuOpen ? 'bg-black/80 backdrop-blur-sm' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <motion.div variants={itemVariants}>
-            <Link href="/" className="text-2xl font-bold text-white">
+            <Link href="#home" className="text-2xl font-bold text-white">
               KA
             </Link>
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex space-x-6">
+          {/* Desktop Navigation — visible from md (768px) up */}
+          <div className="hidden md:flex space-x-6">
             {navItems.map((item) => (
               <motion.div key={item.name} variants={itemVariants}>
                 <Link
@@ -79,17 +79,20 @@ export default function Navbar() {
           <motion.div variants={itemVariants}>
             <Link
               href="#contact"
-              className="hidden lg:inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-black bg-orange-500 hover:bg-orange-600 transition-colors"
+              className="hidden md:inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-black bg-orange-500 hover:bg-orange-600 transition-colors"
             >
               Hire Me
             </Link>
           </motion.div>
 
-          {/* Mobile Menu Button */}
-          <motion.div variants={itemVariants} className="lg:hidden">
+          {/* Mobile Menu Button — visible below md */}
+          <motion.div variants={itemVariants} className="md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-300 hover:text-white"
+              aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
+              className="text-gray-300 hover:text-white p-2"
             >
               {isMobileMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -105,18 +108,19 @@ export default function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden bg-black/95 backdrop-blur-sm"
+            className="md:hidden bg-black/95 backdrop-blur-sm"
           >
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-orange-500 transition-colors"
+                  className="block px-3 py-3 text-base font-medium text-gray-300 hover:text-orange-500 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}
@@ -124,7 +128,7 @@ export default function Navbar() {
               ))}
               <Link
                 href="#contact"
-                className="block px-3 py-2 text-base font-medium text-black bg-orange-500 hover:bg-orange-600 transition-colors rounded-md"
+                className="block px-3 py-3 text-base font-medium text-black bg-orange-500 hover:bg-orange-600 transition-colors rounded-md"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Hire Me

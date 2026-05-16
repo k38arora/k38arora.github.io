@@ -57,10 +57,10 @@ export default function Hero() {
   }
 
   return (
-    <section id="home" ref={ref} className="min-h-screen relative flex items-center overflow-hidden">
+    <section id="home" ref={ref} className="min-h-screen relative flex items-center overflow-hidden pt-16">
       <div className="container mx-auto px-4 z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Text content - Prioritized for LCP */}
+          {/* Text content */}
           <motion.div
             className="space-y-8"
             initial="hidden"
@@ -68,17 +68,11 @@ export default function Hero() {
             variants={containerVariants}
           >
             <motion.div className="space-y-4" variants={itemVariants}>
-              <h1 
-                className="text-5xl md:text-7xl font-bold text-white"
-                style={{
-                  contentVisibility: 'auto',
-                  containIntrinsicSize: '0 150px',
-                }}
-              >
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-white">
                 Krish Arora
               </h1>
               <div>
-                <div className="text-4xl md:text-5xl text-orange-500 font-bold h-[1.5em]">
+                <div className="text-2xl sm:text-4xl md:text-5xl text-orange-500 font-bold h-[1.5em]">
                   <TypeAnimation
                     sequence={[
                       'AI/ML Engineer',
@@ -101,7 +95,7 @@ export default function Hero() {
             </motion.div>
 
             {/* Social Links */}
-            <motion.div 
+            <motion.div
               className="flex gap-3"
               variants={containerVariants}
             >
@@ -114,8 +108,7 @@ export default function Hero() {
                 <motion.a
                   key={href}
                   href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  {...(href.startsWith('mailto:') ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
                   className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-orange-500 hover:border-orange-500 transition-colors"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -128,20 +121,19 @@ export default function Hero() {
             </motion.div>
 
             {/* Action Buttons */}
-            <motion.div 
+            <motion.div
               className="flex flex-wrap gap-4"
               variants={containerVariants}
             >
               <motion.div variants={itemVariants}>
-                <Link href="#contact">
-                  <motion.button
-                    className="px-8 py-3 bg-orange-500 text-black rounded-full font-semibold hover:bg-orange-600 transition-colors flex items-center gap-2 group"
-                    whileHover={{ x: 5 }}
-                  >
-                    Hire Me
-                    <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-                  </motion.button>
-                </Link>
+                <motion.a
+                  href="#contact"
+                  className="inline-flex items-center gap-2 px-8 py-3 bg-orange-500 text-black rounded-full font-semibold hover:bg-orange-600 transition-colors group"
+                  whileHover={{ x: 5 }}
+                >
+                  Hire Me
+                  <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+                </motion.a>
               </motion.div>
               <motion.a
                 href="/Krish_Arora_CV.pdf"
@@ -156,8 +148,8 @@ export default function Hero() {
             </motion.div>
 
             {/* Stats */}
-            <motion.div 
-              className="flex gap-4"
+            <motion.div
+              className="grid grid-cols-3 gap-2 sm:gap-4"
               variants={containerVariants}
             >
               {[
@@ -165,17 +157,17 @@ export default function Hero() {
                 { number: "5+", label: "Projects Shipped" },
                 { number: "2", label: "Internships" }
               ].map((stat) => (
-                <motion.div 
-                  key={stat.label} 
-                  className="flex-1 bg-black/20 p-4 rounded-2xl text-center transition-colors duration-300 hover:bg-orange-500 group"
+                <motion.div
+                  key={stat.label}
+                  className="bg-black/20 p-3 sm:p-4 rounded-2xl text-center transition-colors duration-300 hover:bg-orange-500 group"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300, damping: 10 }}
                   variants={itemVariants}
                 >
-                  <div className="text-3xl font-bold text-orange-500 group-hover:text-white transition-colors duration-300">
+                  <div className="text-2xl sm:text-3xl font-bold text-orange-500 group-hover:text-white transition-colors duration-300">
                     {stat.number}
                   </div>
-                  <div className="text-sm text-gray-400 mt-2 leading-tight group-hover:text-white transition-colors duration-300">
+                  <div className="text-xs sm:text-sm text-gray-400 mt-1 sm:mt-2 leading-tight group-hover:text-white transition-colors duration-300">
                     {stat.label}
                   </div>
                 </motion.div>
@@ -183,15 +175,15 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Image Section - Optimized loading */}
-          <motion.div 
+          {/* Image Section */}
+          <motion.div
             className="hidden lg:flex justify-center items-center"
             initial="hidden"
             animate={controls}
             variants={imageVariants}
           >
             <div className="relative w-[500px] h-[500px]">
-              <div 
+              <div
                 className="absolute inset-0 rounded-full overflow-hidden"
                 style={{ backgroundColor: 'rgba(0, 0, 0, 0.1)' }}
               >
@@ -207,11 +199,11 @@ export default function Hero() {
                   quality={75}
                   onLoad={() => setImageLoaded(true)}
                   priority
-                  sizes="(max-width: 768px) 100vw, 500px"
+                  sizes="(min-width: 1024px) 500px, 0px"
                 />
               </div>
-              
-              <motion.div 
+
+              <motion.div
                 className="absolute inset-0 rounded-full border-2 border-orange-500/20"
                 animate={{
                   scale: [1, 1.05, 1],
@@ -230,4 +222,3 @@ export default function Hero() {
     </section>
   )
 }
-

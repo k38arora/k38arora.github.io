@@ -54,7 +54,7 @@ const itemVariants = {
   },
 }
 
-export default function TechStack() {
+export default function ServicesSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
 
@@ -85,43 +85,34 @@ export default function TechStack() {
             Tools and technologies I work with
           </motion.p>
 
-          {/* 6-col grid: each card spans 2 cols → 3 per row. 4th card forced to col 2 to center bottom row. */}
+          {/* Flexbox layout: justify-center auto-centers the 5th card on its row at all breakpoints */}
           <motion.div
-            className="grid grid-cols-6 gap-6"
+            className="flex flex-wrap justify-center gap-6"
             variants={containerVariants}
           >
-            {categories.map((cat, index) => (
-              <div
-                key={index}
-                className={
-                  index === 3
-                    ? 'col-span-6 md:col-span-3 lg:col-span-2 lg:col-start-2 flex'
-                    : 'col-span-6 md:col-span-3 lg:col-span-2 flex'
-                }
+            {categories.map((cat) => (
+              <motion.div
+                key={cat.title}
+                className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex flex-col min-h-[180px] bg-black/30 backdrop-blur-sm rounded-2xl p-6 border border-gray-800 hover:border-orange-500/40 transition-colors duration-300"
+                variants={itemVariants}
+                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                whileTap={{ scale: 0.95 }}
               >
-                <motion.div
-                  className="flex-1 flex flex-col min-h-[180px] bg-black/30 backdrop-blur-sm rounded-2xl p-6 border border-gray-800 hover:border-orange-500/40 transition-colors duration-300"
-                  style={{ willChange: 'transform' }}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <cat.icon className="w-6 h-6 text-orange-500 shrink-0" />
-                    <h3 className="text-lg font-semibold text-white">{cat.title}</h3>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {cat.techs.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-xs px-3 py-1 rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              </div>
+                <div className="flex items-center gap-3 mb-4">
+                  <cat.icon className="w-6 h-6 text-orange-500 shrink-0" />
+                  <h3 className="text-lg font-semibold text-white">{cat.title}</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {cat.techs.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs px-3 py-1 rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
             ))}
           </motion.div>
         </motion.div>
