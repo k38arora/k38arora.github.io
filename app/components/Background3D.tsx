@@ -8,7 +8,7 @@ import ErrorBoundary from './ErrorBoundary';
 
 function ParticleField() {
   const ref = useRef<THREE.Points>(null);
-  const particleCount = 5000;
+  const particleCount = typeof window !== 'undefined' && window.innerWidth < 768 ? 1500 : 5000;
 
   const positions = useMemo(() => {
     const pos = new Float32Array(particleCount * 3);

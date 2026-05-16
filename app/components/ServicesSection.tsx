@@ -2,24 +2,41 @@
 
 import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Smartphone, Code, PenTool, LineChart, Layers, Zap } from 'lucide-react'
+import { BrainCircuit, Monitor, Database, Cloud, Wrench } from 'lucide-react'
 
-const services = [
-  { icon: Smartphone, title: 'App Development', description: 'Creating intuitive and efficient mobile applications tailored to your needs.' },
-  { icon: Code, title: 'Web Development', description: 'Building responsive and dynamic websites using cutting-edge technologies.' },
-  { icon: PenTool, title: 'UI/UX Design', description: 'Crafting user-centered designs that enhance user experience and engagement.' },
-  { icon: LineChart, title: 'Data Analysis', description: 'Extracting meaningful insights from complex datasets to drive informed decisions.' },
-  { icon: Layers, title: 'Database Management', description: 'Designing and optimizing database structures for efficient data storage and retrieval.' },
-  { icon: Zap, title: 'Performance Optimization', description: 'Enhancing the speed and efficiency of your applications and systems.' },
+const categories = [
+  {
+    icon: BrainCircuit,
+    title: 'AI & Machine Learning',
+    techs: ['Python', 'OpenAI API', 'LangChain', 'scikit-learn', 'PyTorch', 'NLTK', 'spaCy', 'Streamlit'],
+  },
+  {
+    icon: Monitor,
+    title: 'Frontend',
+    techs: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'HTML/CSS'],
+  },
+  {
+    icon: Database,
+    title: 'Backend & Data',
+    techs: ['Node.js', 'PostgreSQL', 'MySQL', 'pandas', 'NumPy', 'Matplotlib', 'REST APIs'],
+  },
+  {
+    icon: Cloud,
+    title: 'Cloud & Automation',
+    techs: ['Microsoft Azure', 'Azure AI', 'Gmail API', 'Docker', 'n8n', 'Git', 'Vercel'],
+  },
+  {
+    icon: Wrench,
+    title: 'Developer Tools',
+    techs: ['VS Code', 'Claude Code', 'GitHub', 'PyCharm', 'python-dotenv', 'uv'],
+  },
 ]
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
+    transition: { staggerChildren: 0.12, delayChildren: 0.05 },
   },
 }
 
@@ -30,53 +47,81 @@ const itemVariants = {
     scale: 1,
     transition: {
       type: 'spring',
-      stiffness: 100,
-      damping: 15,
+      stiffness: 75,
+      damping: 18,
       mass: 1,
     },
   },
 }
 
-export default function Services() {
+export default function TechStack() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const isInView = useInView(ref, { once: true, amount: 0.2 })
 
   return (
-    <section ref={ref} id="services" className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section ref={ref} id="tech-stack" className="py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          animate={isInView ? 'visible' : 'hidden'}
           variants={containerVariants}
         >
-          <motion.h2 
+          <motion.h2
             className="text-4xl font-bold text-center text-white mb-4"
             variants={itemVariants}
           >
-            Services
+            Tech Stack
           </motion.h2>
-          <motion.p 
-            className="text-xl text-center text-gray-300 mb-12"
+          <motion.div
+            className="w-20 h-1 bg-orange-500 mx-auto mb-4 rounded-full"
+            initial={{ width: 0 }}
+            animate={isInView ? { width: 80 } : { width: 0 }}
+            transition={{ duration: 1, delay: 0.3 }}
+          />
+          <motion.p
+            className="text-xl text-center text-gray-300 mb-14"
             variants={itemVariants}
           >
-            Empowering your digital journey with cutting-edge solutions
+            Tools and technologies I work with
           </motion.p>
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+
+          {/* 6-col grid: each card spans 2 cols → 3 per row. 4th card forced to col 2 to center bottom row. */}
+          <motion.div
+            className="grid grid-cols-6 gap-6"
             variants={containerVariants}
           >
-            {services.map((service, index) => (
-              <motion.div
+            {categories.map((cat, index) => (
+              <div
                 key={index}
-                className="bg-black bg-opacity-30 backdrop-blur-sm rounded-2xl p-6 hover:bg-opacity-40 transition-all duration-300 border border-gray-700"
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                whileTap={{ scale: 0.95 }}
+                className={
+                  index === 3
+                    ? 'col-span-6 md:col-span-3 lg:col-span-2 lg:col-start-2 flex'
+                    : 'col-span-6 md:col-span-3 lg:col-span-2 flex'
+                }
               >
-                <service.icon className="w-12 h-12 text-orange-500 mb-4" />
-                <h3 className="text-xl font-semibold text-orange-500 mb-2">{service.title}</h3>
-                <p className="text-gray-300">{service.description}</p>
-              </motion.div>
+                <motion.div
+                  className="flex-1 flex flex-col min-h-[180px] bg-black/30 backdrop-blur-sm rounded-2xl p-6 border border-gray-800 hover:border-orange-500/40 transition-colors duration-300"
+                  style={{ willChange: 'transform' }}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <cat.icon className="w-6 h-6 text-orange-500 shrink-0" />
+                    <h3 className="text-lg font-semibold text-white">{cat.title}</h3>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {cat.techs.map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-xs px-3 py-1 rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
             ))}
           </motion.div>
         </motion.div>
@@ -84,4 +129,3 @@ export default function Services() {
     </section>
   )
 }
-

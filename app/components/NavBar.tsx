@@ -19,8 +19,9 @@ export default function Navbar() {
 
   const navItems = [
     { name: 'Home', href: '#home' },
-    { name: 'Services', href: '#services' },
     { name: 'About', href: '#about' },
+    { name: 'Tech Stack', href: '#tech-stack' },
+    { name: 'Experience', href: '#experience' },
     { name: 'Projects', href: '#projects' },
     { name: 'Contact', href: '#contact' },
   ]
@@ -61,12 +62,12 @@ export default function Navbar() {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden lg:flex space-x-6">
             {navItems.map((item) => (
               <motion.div key={item.name} variants={itemVariants}>
                 <Link
                   href={item.href}
-                  className="text-gray-300 hover:text-orange-500 transition-colors"
+                  className="text-gray-300 hover:text-orange-500 transition-colors text-sm"
                 >
                   {item.name}
                 </Link>
@@ -78,14 +79,14 @@ export default function Navbar() {
           <motion.div variants={itemVariants}>
             <Link
               href="#contact"
-              className="hidden md:inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-black bg-orange-500 hover:bg-orange-600 transition-colors"
+              className="hidden lg:inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-black bg-orange-500 hover:bg-orange-600 transition-colors"
             >
               Hire Me
             </Link>
           </motion.div>
 
           {/* Mobile Menu Button */}
-          <motion.div variants={itemVariants} className="md:hidden">
+          <motion.div variants={itemVariants} className="lg:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-gray-300 hover:text-white"
@@ -108,7 +109,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-black/95 backdrop-blur-sm"
+            className="lg:hidden bg-black/95 backdrop-blur-sm"
           >
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navItems.map((item) => (

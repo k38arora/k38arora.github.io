@@ -71,13 +71,15 @@ return (
             className="w-20 h-1 bg-orange-500 mx-auto mb-8"
             variants={underlineVariants}
           ></motion.div>
-          <motion.p 
+          <motion.p
             className="text-lg text-gray-300"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Cultivating Connections: Reach Out And Connect With Me
+            Open to AI/ML Engineering and SWE internships for Fall 2026.
+            <br />
+            Based in Waterloo, ON.
           </motion.p>
         </motion.div>
 
@@ -93,10 +95,10 @@ return (
             <Mail className="w-12 h-12 text-orange-500 mb-4" />
             <h3 className="text-2xl font-semibold text-white mb-2">Email</h3>
             <a
-              href="mailto:krish.arora161003@gmail.com"
+              href="mailto:k38arora@uwaterloo.ca"
               className="text-gray-300 hover:text-orange-500 transition-colors"
             >
-              krish.arora161003@gmail.com
+              k38arora@uwaterloo.ca
             </a>
           </motion.div>
 
@@ -122,8 +124,7 @@ return (
           variants={itemVariants}
           className="text-center text-gray-400 mt-12"
         >
-          I&apos;m always open to new opportunities and collaborations. 
-          Feel free to reach out through email or connect with me on LinkedIn!
+          Feel free to reach out — I&apos;m always happy to chat about AI, engineering, or new opportunities.
         </motion.p>
       </motion.div>
     </div>

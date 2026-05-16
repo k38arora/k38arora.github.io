@@ -43,8 +43,8 @@ export default function ClientLayout() {
           <Background3D />
           <NavBar />
           <Hero />
-          <ServicesSection />
           <AboutSection />
+          <ServicesSection />
           <ExperienceSection />
           <ProjectsSection />
           <ContactSection />

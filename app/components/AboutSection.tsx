@@ -2,20 +2,22 @@
 
 import React, { useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, BrainCircuit, CloudCog, Link2 } from 'lucide-react';
 import Image from 'next/image';
 
 type IconType = string | React.ComponentType<{ className?: string }>;
 
 interface Skill {
-  icon: IconType;
+  icon?: IconType;
+  iconText?: string;
   label: string;
   percentage: number;
 }
 
-const CircularProgress = React.memo(({ percentage, icon, label, inView }: { 
+const CircularProgress = React.memo(({ percentage, icon, iconText, label, inView }: {
   percentage: number;
-  icon: IconType;
+  icon?: IconType;
+  iconText?: string;
   label: string;
   inView: boolean;
 }) => {
@@ -60,11 +62,13 @@ const CircularProgress = React.memo(({ percentage, icon, label, inView }: {
           animate={inView ? { opacity: 1, rotate: 0 } : { opacity: 0, rotate: -90 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          {typeof icon === 'string' ? (
+          {iconText ? (
+            <span className="text-[11px] font-bold text-orange-500 text-center leading-tight">{iconText}</span>
+          ) : typeof icon === 'string' ? (
             <Image src={icon} alt={label} width={32} height={32} className="w-8 h-8" />
-          ) : (
+          ) : icon ? (
             React.createElement(icon, { className: "w-8 h-8" })
-          )}
+          ) : null}
         </motion.div>
       </div>
       <motion.div 
@@ -83,30 +87,35 @@ const CircularProgress = React.memo(({ percentage, icon, label, inView }: {
 CircularProgress.displayName = 'CircularProgress';
 
 const skills: Skill[] = [
-  { 
+  {
     icon: "/icons/python-icon.svg",
     label: 'Python',
     percentage: 90
   },
   {
     icon: "/icons/react-icon.svg",
-    label: 'React',
+    label: 'React / Next.js',
     percentage: 85
   },
   {
     icon: "/icons/SQL-icon.svg",
-    label: 'SQL',
+    label: 'SQL / PostgreSQL',
+    percentage: 82
+  },
+  {
+    icon: BrainCircuit,
+    label: 'OpenAI API',
     percentage: 85
   },
   {
-    icon: "/icons/msexcel-icon.svg",
-    label: 'Excel',
+    icon: CloudCog,
+    label: 'Azure AI',
     percentage: 80
   },
   {
-    icon: "/icons/hubspot-icon.svg",
-    label: 'HubSpot',
-    percentage: 85
+    icon: Link2,
+    label: 'LangChain',
+    percentage: 78
   }
 ];
 
@@ -135,7 +144,7 @@ const itemVariants = {
 
 export default function AboutSection() {
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.35 });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
@@ -172,35 +181,32 @@ export default function AboutSection() {
             animate={isInView ? { width: 80 } : { width: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
           ></motion.div>
-          <motion.p 
-            className="text-lg text-gray-300 mb-6" 
+          <motion.p
+            className="text-lg text-gray-300 mb-6"
             variants={itemVariants}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.7 }}
           >
-            I&apos;m Krish Arora, a Bachelor of Mathematics student at the University of Waterloo, expecting to graduate in 2027. 
-            With a strong foundation in data analysis and strategic decision-making, I excel at identifying market trends to drive business insights. 
-            My technical expertise includes proficiency in SQL, Power BI, and advanced Excel functions, enabling efficient data management and interpretation of complex datasets.
+            I&apos;m Krish Arora, a 3rd-year Bachelor of Mathematics (Statistics) student at the University of Waterloo, graduating May 2027.
           </motion.p>
-          <motion.p 
-            className="text-lg text-gray-300 mb-6" 
+          <motion.p
+            className="text-lg text-gray-300 mb-6"
             variants={itemVariants}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.9 }}
           >
-          Certified in Introduction to Career Skills in Data Analytics, Bloomberg Market Concepts, Webflow 101, and Data-Driven Decision Making from Google Data Analytics (all in 2024), I am committed to continuous learning and professional development. 
-          I have a keen interest in upcoming AI models and enjoy researching how they work and their potential applications.
+            I build AI-powered tools and full-stack applications — from automated invoice processing pipelines using the OpenAI API to enterprise chatbots deployed on Azure. My work spans Python backends, LLM integrations, and React/Next.js frontends. My statistics background gives me a stronger foundation in ML fundamentals than most developers coming from pure CS.
           </motion.p>
-          <motion.p 
-            className="text-lg text-gray-300 mb-8" 
+          <motion.p
+            className="text-lg text-gray-300 mb-8"
             variants={itemVariants}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 1.1 }}
           >
-          Outside of my academic and professional pursuits, I love reading books and staying active by going to the gym.
+            I&apos;m actively seeking AI/ML Engineering and Software Development internships for Fall 2026.
           </motion.p>
           <motion.a
             href="/Krish_Arora_CV.pdf"
@@ -219,7 +225,7 @@ export default function AboutSection() {
         </motion.div>
 
         <motion.div 
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 max-w-4xl mx-auto px-4"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 max-w-5xl mx-auto px-4"
           variants={itemVariants}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -235,6 +241,7 @@ export default function AboutSection() {
               <CircularProgress
                 percentage={skill.percentage}
                 icon={skill.icon}
+                iconText={skill.iconText}
                 label={skill.label}
                 inView={isInView}
               />

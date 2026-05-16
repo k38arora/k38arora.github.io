@@ -1,5 +1,6 @@
 import localFont from 'next/font/local'
 import type { Metadata, Viewport } from 'next'
+import type { ReactNode } from 'react'
 import './globals.css'
 
 const inter = localFont({
@@ -7,11 +8,14 @@ const inter = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Krish Arora - Data Analyst & Developer',
-  description: 'Portfolio of Krish Arora, showcasing skills in data analysis and development.',
+  title: 'Krish Arora — AI/ML Engineer | Python · LLMs · Full Stack',
+  description: '3rd-year BMath student at UWaterloo building AI automation tools. Experience with OpenAI API, Azure AI, LangChain, and full-stack engineering. Open to AI/ML and SWE opportunities.',
+  icons: {
+    icon: '/favicon.svg',
+  },
   openGraph: {
-    title: 'Krish Arora - Data Analyst & Developer',
-    description: 'Portfolio of Krish Arora, showcasing skills in data analysis and development.',
+    title: 'Krish Arora — AI/ML Engineer | Python · LLMs · Full Stack',
+    description: '3rd-year BMath student at UWaterloo building AI automation tools. Experience with OpenAI API, Azure AI, LangChain, and full-stack engineering. Open to AI/ML and SWE opportunities.',
     type: 'website',
   },
 }
@@ -24,7 +28,7 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
   return (
     <html lang="en" className="scroll-smooth">

@@ -3,20 +3,22 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
-import { Instagram, Linkedin, Github, Mail } from 'lucide-react'
+import { Instagram, Linkedin, Mail } from 'lucide-react'
+import GitHubIcon from './GitHubIcon'
 
 const navItems = [
   { name: 'Home', href: '#home' },
-  { name: 'Services', href: '#services' },
-  { name: 'About me', href: '#about' },
+  { name: 'About', href: '#about' },
+  { name: 'Tech Stack', href: '#tech-stack' },
+  { name: 'Experience', href: '#experience' },
   { name: 'Projects', href: '#projects' },
-  { name: 'Contact me', href: '#contact' },
+  { name: 'Contact', href: '#contact' },
 ]
 
 const socialLinks = [
   { icon: Instagram, href: 'https://instagram.com/krish7847', label: 'Instagram' },
   { icon: Linkedin, href: 'https://linkedin.com/in/krish6', label: 'LinkedIn' },
-  { icon: Github, href: 'https://github.com/k38arora', label: 'Github' },
+  { icon: GitHubIcon, href: 'https://github.com/k38arora', label: 'GitHub' },
 ]
 
 const containerVariants = {
@@ -115,12 +117,12 @@ export default function Footer() {
 
         <motion.div variants={itemVariants} className="text-center space-y-4 mb-8">
           <motion.a
-            href="mailto:krish.arora161003@gmail.com"
+            href="mailto:k38arora@uwaterloo.ca"
             className="flex items-center justify-center gap-2 text-gray-400 hover:text-orange-500 transition-colors"
             whileHover={{ scale: 1.05 }}
           >
             <Mail className="w-5 h-5" />
-            <span>krish.arora161003@gmail.com</span>
+            <span>k38arora@uwaterloo.ca</span>
           </motion.a>
         </motion.div>
 

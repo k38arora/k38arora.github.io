@@ -2,10 +2,11 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion, useInView, useAnimation } from 'framer-motion'
-import { ArrowRight, Instagram, Linkedin, Github, Mail } from 'lucide-react'
+import { ArrowRight, Instagram, Linkedin, Mail } from 'lucide-react'
 import Image from 'next/image'
 import { TypeAnimation } from 'react-type-animation'
 import Link from 'next/link'
+import GitHubIcon from './GitHubIcon'
 
 export default function Hero() {
   const controls = useAnimation()
@@ -76,19 +77,26 @@ export default function Hero() {
               >
                 Krish Arora
               </h1>
-              <div className="text-4xl md:text-5xl text-orange-500 font-bold h-[1.5em]">
-                <TypeAnimation
-                  sequence={[
-                    'Data Analyst',
-                    2000,
-                    'Developer',
-                    2000,
-                  ]}
-                  wrapper="span"
-                  speed={50}
-                  repeat={Infinity}
-                  className="inline-block"
-                />
+              <div>
+                <div className="text-4xl md:text-5xl text-orange-500 font-bold h-[1.5em]">
+                  <TypeAnimation
+                    sequence={[
+                      'AI/ML Engineer',
+                      2000,
+                      'Full Stack Developer',
+                      2000,
+                      'Automation Builder',
+                      2000,
+                    ]}
+                    wrapper="span"
+                    speed={50}
+                    repeat={Infinity}
+                    className="inline-block"
+                  />
+                </div>
+                <p className="text-base md:text-lg text-gray-400 mt-1">
+                  BMath Statistics @ University of Waterloo · Graduating May 2027
+                </p>
               </div>
             </motion.div>
 
@@ -100,8 +108,8 @@ export default function Hero() {
               {[
                 { Icon: Instagram, href: "https://instagram.com/krish7847", label: "Instagram" },
                 { Icon: Linkedin, href: "https://linkedin.com/in/krish6", label: "LinkedIn" },
-                { Icon: Github, href: "https://github.com/k38arora", label: "GitHub" },
-                { Icon: Mail, href: "mailto:krish.arora161003@gmail.com", label: "Email" }
+                { Icon: GitHubIcon, href: "https://github.com/k38arora", label: "GitHub" },
+                { Icon: Mail, href: "mailto:k38arora@uwaterloo.ca", label: "Email" }
               ].map(({ Icon, href, label }) => (
                 <motion.a
                   key={href}
@@ -153,9 +161,9 @@ export default function Hero() {
               variants={containerVariants}
             >
               {[
-                { number: "2+", label: "Years Experience" },
-                { number: "3+", label: "Projects Done" },
-                { number: "4+", label: "Certifications" }
+                { number: "2+", label: "Years of Industry Experience" },
+                { number: "5+", label: "Projects Shipped" },
+                { number: "2", label: "Internships" }
               ].map((stat) => (
                 <motion.div 
                   key={stat.label} 
@@ -167,7 +175,7 @@ export default function Hero() {
                   <div className="text-3xl font-bold text-orange-500 group-hover:text-white transition-colors duration-300">
                     {stat.number}
                   </div>
-                  <div className="text-sm text-gray-400 mt-2 whitespace-nowrap group-hover:text-white transition-colors duration-300">
+                  <div className="text-sm text-gray-400 mt-2 leading-tight group-hover:text-white transition-colors duration-300">
                     {stat.label}
                   </div>
                 </motion.div>
@@ -190,7 +198,7 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/40 to-transparent z-20" />
                 <Image
                   src="/images/profile-image.jpg"
-                  alt="Krish Arora - Data Analyst & Developer"
+                  alt="Krish Arora - AI/ML Engineer"
                   width={500}
                   height={500}
                   className={`object-cover transition-opacity duration-700 ${
