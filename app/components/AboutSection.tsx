@@ -177,10 +177,10 @@ export default function AboutSection() {
                 <div className="p-4 sm:p-6">
                   <h3 className="text-orange-500 font-semibold text-sm uppercase tracking-widest mb-4">Overview</h3>
                   <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                    I build AI-powered tools and full-stack applications — from automated invoice processing pipelines using the OpenAI API, to enterprise chatbots deployed on Azure. My work spans Python backends, LLM integrations, and React/Next.js frontends.
+                    I build AI-powered tools and full-stack applications from automated invoice processing pipelines using the OpenAI API, to enterprise chatbots deployed on Azure. My work spans Python backends, LLM integrations, and React/Next.js frontends.
                   </p>
                   <p className="text-gray-300 text-sm leading-relaxed">
-                    My statistics foundation gives me a stronger grasp of ML fundamentals than most developers coming from pure CS — probability theory, linear models, and experimental design aren&apos;t electives for me, they&apos;re core curriculum.
+                    My statistics foundation gives me a stronger grasp of ML fundamentals than most developers coming from pure CS. Probability theory, linear models, and experimental design aren&apos;t electives for me, they&apos;re core curriculum.
                   </p>
                 </div>
               </motion.div>
@@ -214,7 +214,7 @@ export default function AboutSection() {
                 <div className="p-4 sm:p-6">
                   <h3 className="text-orange-500 font-semibold text-sm uppercase tracking-widest mb-4">Education</h3>
                   <div className="mb-3">
-                    <p className="text-white font-medium text-sm">🎓 Bachelor of Mathematics — Statistics (Honours, Co-op)</p>
+                    <p className="text-white font-medium text-sm">🎓 Bachelor of Mathematics — Statistics (Honours)</p>
                     <p className="text-gray-400 text-xs mt-1">University of Waterloo · Sep 2022 – May 2027 (Expected)</p>
                   </div>
                   <p className="text-gray-300 text-sm mb-4">🏆 President&apos;s Scholarship of Distinction · 2023</p>
