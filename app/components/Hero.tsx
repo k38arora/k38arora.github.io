@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import { motion, useInView, useAnimation } from 'framer-motion'
+import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { ArrowRight, Instagram, Linkedin, Mail } from 'lucide-react'
 import Image from 'next/image'
 import { TypeAnimation } from 'react-type-animation'
@@ -9,16 +9,7 @@ import Link from 'next/link'
 import GitHubIcon from './GitHubIcon'
 
 export default function Hero() {
-  const controls = useAnimation()
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
   const [imageLoaded, setImageLoaded] = useState(false)
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start('visible')
-    }
-  }, [controls, isInView])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -26,7 +17,7 @@ export default function Hero() {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.3,
+        delayChildren: 0.1,
       },
     },
   }
@@ -57,14 +48,14 @@ export default function Hero() {
   }
 
   return (
-    <section id="home" ref={ref} className="min-h-screen relative flex items-center overflow-hidden pt-16">
+    <section id="home" className="min-h-screen relative flex items-center overflow-hidden pt-16">
       <div className="container mx-auto px-4 z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Text content */}
           <motion.div
             className="space-y-8"
             initial="hidden"
-            animate={controls}
+            animate="visible"
             variants={containerVariants}
           >
             <motion.div className="space-y-4" variants={itemVariants}>
@@ -179,7 +170,7 @@ export default function Hero() {
           <motion.div
             className="hidden lg:flex justify-center items-center"
             initial="hidden"
-            animate={controls}
+            animate="visible"
             variants={imageVariants}
           >
             <div className="relative w-[500px] h-[500px]">

@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import NavBar from './NavBar'
@@ -14,13 +15,24 @@ import Footer from './Footer'
 const Background3D = dynamic(() => import('./Background3D'), { ssr: false })
 
 export default function ClientLayout() {
+  const [isBgReady, setIsBgReady] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsBgReady(true), 800)
+    return () => clearTimeout(timer)
+  }, [])
+
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
-    >
-      <Background3D />
+    <div>
+      {isBgReady && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
+        >
+          <Background3D />
+        </motion.div>
+      )}
       <NavBar />
       <Hero />
       <AboutSection />
@@ -29,6 +41,6 @@ export default function ClientLayout() {
       <ProjectsSection />
       <ContactSection />
       <Footer />
-    </motion.div>
+    </div>
   )
 }
