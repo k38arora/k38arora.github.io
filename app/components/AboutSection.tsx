@@ -120,17 +120,6 @@ const skills: Skill[] = [
   }
 ];
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: "easeOut"
-    }
-  }
-};
 
 export default function AboutSection() {
   const sectionRef = useRef(null);
@@ -151,9 +140,9 @@ export default function AboutSection() {
       style={{ scale }}
     >
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center mb-16">
+        <div className="max-w-4xl mx-auto text-center mb-6">
           <motion.h2
-            className="text-4xl font-bold text-white mb-6"
+            className="text-3xl sm:text-4xl font-bold text-white mb-6"
             initial={{ opacity: 0, y: -20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -166,30 +155,105 @@ export default function AboutSection() {
             animate={isInView ? { width: 80 } : { width: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
           />
-          <motion.p
-            className="text-lg text-gray-300 mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-          >
-            I&apos;m Krish Arora, a 3rd-year Bachelor of Mathematics (Statistics) student at the University of Waterloo, graduating May 2027.
-          </motion.p>
-          <motion.p
-            className="text-lg text-gray-300 mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-          >
-            I build AI-powered tools and full-stack applications — from automated invoice processing pipelines using the OpenAI API to enterprise chatbots deployed on Azure. My work spans Python backends, LLM integrations, and React/Next.js frontends. My statistics background gives me a stronger foundation in ML fundamentals than most developers coming from pure CS.
-          </motion.p>
-          <motion.p
-            className="text-lg text-gray-300 mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 1.1 }}
-          >
-            I&apos;m actively seeking AI/ML Engineering and Software Development internships for Fall 2026.
-          </motion.p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-12">
+            {/* Card 1 — Overview */}
+            <motion.div
+              className="relative rounded-xl overflow-hidden border border-gray-800 bg-[#0d0d0d] hover:border-orange-500/40 transition-colors duration-300"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ type: 'spring', stiffness: 75, damping: 18, mass: 1, delay: 0.7 }}
+            >
+              <motion.div
+                initial={{ clipPath: 'inset(0 0 100% 0)' }}
+                animate={isInView ? { clipPath: 'inset(0 0 0% 0)' } : { clipPath: 'inset(0 0 100% 0)' }}
+                transition={{ duration: 1.4, ease: 'linear', delay: 0.7 }}
+              >
+                <div className="flex items-center gap-2 px-4 py-3 bg-gray-900 border-b border-gray-800">
+                  <span className="w-3 h-3 rounded-full bg-orange-500/80" />
+                  <span className="w-3 h-3 rounded-full bg-orange-500/40" />
+                  <span className="w-3 h-3 rounded-full bg-orange-500/20" />
+                  <span className="ml-3 text-gray-400 text-xs font-mono">overview.md</span>
+                </div>
+                <div className="p-4 sm:p-6">
+                  <h3 className="text-orange-500 font-semibold text-sm uppercase tracking-widest mb-4">Overview</h3>
+                  <p className="text-gray-300 text-sm leading-relaxed mb-4">
+                    I build AI-powered tools and full-stack applications — from automated invoice processing pipelines using the OpenAI API, to enterprise chatbots deployed on Azure. My work spans Python backends, LLM integrations, and React/Next.js frontends.
+                  </p>
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    My statistics foundation gives me a stronger grasp of ML fundamentals than most developers coming from pure CS — probability theory, linear models, and experimental design aren&apos;t electives for me, they&apos;re core curriculum.
+                  </p>
+                </div>
+              </motion.div>
+              <motion.div
+                className="absolute left-0 right-0 h-px pointer-events-none"
+                style={{ background: '#ea580c', boxShadow: '0 0 10px 4px rgba(234,88,12,0.85)' }}
+                initial={{ top: 0, opacity: 0 }}
+                animate={isInView ? { top: '100%', opacity: [1, 1, 0] } : { top: 0, opacity: 0 }}
+                transition={{ duration: 1.4, ease: 'linear', delay: 0.7 }}
+              />
+            </motion.div>
+
+            {/* Card 2 — Education */}
+            <motion.div
+              className="relative rounded-xl overflow-hidden border border-gray-800 bg-[#0d0d0d] hover:border-orange-500/40 transition-colors duration-300"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ type: 'spring', stiffness: 75, damping: 18, mass: 1, delay: 0.95 }}
+            >
+              <motion.div
+                initial={{ clipPath: 'inset(0 0 100% 0)' }}
+                animate={isInView ? { clipPath: 'inset(0 0 0% 0)' } : { clipPath: 'inset(0 0 100% 0)' }}
+                transition={{ duration: 1.4, ease: 'linear', delay: 0.95 }}
+              >
+                <div className="flex items-center gap-2 px-4 py-3 bg-gray-900 border-b border-gray-800">
+                  <span className="w-3 h-3 rounded-full bg-orange-500/80" />
+                  <span className="w-3 h-3 rounded-full bg-orange-500/40" />
+                  <span className="w-3 h-3 rounded-full bg-orange-500/20" />
+                  <span className="ml-3 text-gray-400 text-xs font-mono">education.md</span>
+                </div>
+                <div className="p-4 sm:p-6">
+                  <h3 className="text-orange-500 font-semibold text-sm uppercase tracking-widest mb-4">Education</h3>
+                  <div className="mb-3">
+                    <p className="text-white font-medium text-sm">🎓 Bachelor of Mathematics — Statistics (Honours, Co-op)</p>
+                    <p className="text-gray-400 text-xs mt-1">University of Waterloo · Sep 2022 – May 2027 (Expected)</p>
+                  </div>
+                  <p className="text-gray-300 text-sm mb-4">🏆 President&apos;s Scholarship of Distinction · 2023</p>
+                  <p className="text-gray-400 text-xs uppercase tracking-wider mb-3">Relevant Coursework</p>
+                  <div className="overflow-x-auto">
+                    <div className="space-y-3 font-mono text-xs min-w-max">
+                      <div>
+                        <p className="text-gray-300 mb-1">Machine Learning &amp; Statistics</p>
+                        <p className="text-gray-500">├── Probability (STAT 230)</p>
+                        <p className="text-gray-500">├── Statistics (STAT 231)</p>
+                        <p className="text-gray-500">├── Applied Linear Models (STAT 331)</p>
+                        <p className="text-gray-500">└── Sampling &amp; Experimental Design (STAT 332)</p>
+                      </div>
+                      <div>
+                        <p className="text-gray-300 mb-1">Mathematics &amp; Computing</p>
+                        <p className="text-gray-500">├── Linear Algebra I &amp; II (MATH 136, 235)</p>
+                        <p className="text-gray-500">├── Intro to Computational Mathematics (CS 371)</p>
+                        <p className="text-gray-500">├── Data Types and Structures (CS 234)</p>
+                        <p className="text-gray-500">└── Differential Equations (AMATH 250)</p>
+                      </div>
+                      <div>
+                        <p className="text-gray-300 mb-1">Business &amp; Entrepreneurship</p>
+                        <p className="text-gray-500">├── Business Technology &amp; Infrastructure (BET 210)</p>
+                        <p className="text-gray-500">├── Foundations of Entrepreneurial Practice (BET 100)</p>
+                        <p className="text-gray-500">└── Business Finance (ECON 371)</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+              <motion.div
+                className="absolute left-0 right-0 h-px pointer-events-none"
+                style={{ background: '#ea580c', boxShadow: '0 0 10px 4px rgba(234,88,12,0.85)' }}
+                initial={{ top: 0, opacity: 0 }}
+                animate={isInView ? { top: '100%', opacity: [1, 1, 0] } : { top: 0, opacity: 0 }}
+                transition={{ duration: 1.4, ease: 'linear', delay: 0.95 }}
+              />
+            </motion.div>
+          </div>
           <motion.a
             href="/Krish_Arora_CV.pdf"
             download="Krish_Arora_CV.pdf"
